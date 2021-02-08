@@ -2,9 +2,9 @@
 
 Este projeto foi construído a partir da API pública disponível pela Marvel e tem como objetivo demonstrar o conhecimento técnico na Stack utilizada.
 
-## Available Scripts
+## Scripts disponíveis
 
-In the project directory, you can run:
+Na pasta raiz do projeto, voce pode rodar os seguintes comandos:
 
 ### `yarn start`
 
