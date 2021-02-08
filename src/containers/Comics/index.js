@@ -105,8 +105,8 @@ const Comics = () => {
         <div>
           <h1>Lista de quadrinhos</h1>
           <p>
-            Veja abaixo a lista de quadrinhos disponíveis. Clique para selecioná-los e compartilhar
-            com seus amigos.
+            Veja abaixo a lista de quadrinhos disponíveis. Clique para selecionar e compartilhar com
+            seus amigos.
           </p>
         </div>
 
