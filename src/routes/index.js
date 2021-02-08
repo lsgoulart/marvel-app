@@ -26,7 +26,7 @@ const Routes = () => (
   <Section>
     <Marvel />
     <Main>
-      <Router>
+      <Router basepath="/marvel-app">
         <Route path="/" component={lazy(() => import('../containers/Comics'))} />
         <Route
           path="/quadrinho/:id"
