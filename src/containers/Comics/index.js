@@ -94,6 +94,11 @@ const Comics = () => {
     setCurrentPage(selected)
   }, [])
 
+  const checkIsSelected = useCallback(
+    (item) => selectedComics.find((comic) => comic.id === item.id),
+    [selectedComics],
+  )
+
   return (
     <Section>
       <Header>
@@ -105,12 +110,7 @@ const Comics = () => {
           </p>
         </div>
 
-        <Search
-          onChange={(terms) => {
-            console.log(terms)
-            setSearchTerm(terms)
-          }}
-        />
+        <Search onChange={setSearchTerm} />
       </Header>
 
       {loading && (
@@ -120,11 +120,11 @@ const Comics = () => {
       )}
 
       <Grid>
-        <AnimatePresence transition={{ staggerChildren: 0.5 }}>
+        <AnimatePresence>
           {comicsList?.data.results.map((item) => (
             <Comic
               item={item}
-              isSelected={selectedComics.includes(item)}
+              isSelected={checkIsSelected(item)}
               setSelected={(comic) => toggleSelected(comic)}
               key={item.id}
             />
