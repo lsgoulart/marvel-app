@@ -1,52 +1,87 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { AnimatePresence } from 'framer-motion'
 
 import useFetch from '../../hooks/useFetch'
 import { getComics } from '../../services/index'
+import Comic from '../../components/Comic'
+import SelectedComics from '../../components/SelectedComics'
+
+const Section = styled.section`
+  margin-top: 60px;
+`
+
+const Header = styled.div`
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  padding: 0 24px;
+  color: #0f0d0f;
+  margin: 32px 0;
+
+  h1 {
+    margin-bottom: 16px;
+  }
+`
 
 const Grid = styled.div`
   widht: 100%;
+  margin: 0 auto;
   padding: 24px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: 20px;
+  margin-bottom: 100px;
 `
-const Item = styled.div`
+
+const Loading = styled.div`
+  width: 100%;
   display: flex;
   flex-flow: row wrap;
-  border-radius: 3px;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-  }
+  align-items: center;
+  justify-content: center;
 `
 
 const Comics = () => {
   const { response, loading } = useFetch(getComics)
+  const [selectedComics, setSelectedComics] = useState([])
 
-  console.log(response)
+  const toggleSelected = (comic) => {
+    setSelectedComics((comics) =>
+      comics.includes(comic) ? comics.filter((i) => i !== comic) : [...comics, comic],
+    )
+  }
 
   return (
-    <section>
-      <h1>Comics</h1>
+    <Section>
+      <Header>
+        <h1>Lista de quadrinhos</h1>
+        <p>
+          Veja abaixo a lista de quadrinhos disponíveis. Clique para selecioná-los e compartilhar
+          com seus amigos.
+        </p>
+      </Header>
 
-      {loading && <div>carregando...</div>}
+      {loading && (
+        <Loading>
+          <div>carregando...</div>
+        </Loading>
+      )}
 
       <Grid>
-        {response?.data.results.map((item) => (
-          <Item>
-            <img
-              src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
-              title={item.title}
-              alt={item.title}
+        <AnimatePresence transition={{ staggerChildren: 0.5 }}>
+          {response?.data.results.map((item) => (
+            <Comic
+              item={item}
+              isSelected={selectedComics.includes(item)}
+              setSelected={(comic) => toggleSelected(comic)}
             />
-          </Item>
-        ))}
+          ))}
+        </AnimatePresence>
       </Grid>
-    </section>
+
+      <SelectedComics items={selectedComics} />
+    </Section>
   )
 }
 

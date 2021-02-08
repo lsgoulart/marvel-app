@@ -13,7 +13,7 @@ export default createGlobalStyle`
   }
   body, html {
     font-family: 'Bebas Neue', sans-serif;
-    background: #ED1D24;
+    background: #DFD7CB;
     color: white;
     font-smoothing: antialiased;
   }
