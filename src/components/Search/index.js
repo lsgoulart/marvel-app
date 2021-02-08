@@ -23,7 +23,7 @@ const Search = ({ onChange }) => {
   const [value, setValue] = useState()
   useEffect(() => {
     onChange(value)
-  }, [value])
+  }, [value, onChange])
 
   return (
     <Wrapper>
