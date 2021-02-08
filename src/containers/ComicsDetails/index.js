@@ -19,6 +19,12 @@ const Container = styled.main`
 
   img {
     margin-right: 32px;
+    width: 40%;
+    max-width: 550px;
+  }
+
+  > div {
+    width: 60%;
   }
 
   p {
@@ -44,6 +50,7 @@ const ImageList = styled.div`
   img {
     max-width: 200px;
     border: 5px solid #0f0d0f;
+    margin-bottom: 20px;
   }
 `
 
