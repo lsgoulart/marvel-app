@@ -72,7 +72,7 @@ const ComicsDetails = ({ id }) => {
     fetchData()
   }, [id])
 
-  console.log(loading, comicDetails)
+  if(loading) return <h1>Carregando...</h1>
 
   return (
     <Section>
