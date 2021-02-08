@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import styled from 'styled-components'
 import { AnimatePresence } from 'framer-motion'
 
-import useFetch from '../../hooks/useFetch'
 import { getComics } from '../../services/index'
-import Comic from '../../components/Comic'
-import SelectedComics from '../../components/SelectedComics'
+import { Comic, SelectedComics, Pagination } from '../../components'
 
 const Section = styled.section`
   margin-top: 60px;
@@ -31,7 +29,7 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 60px;
 `
 
 const Loading = styled.div`
@@ -40,10 +38,16 @@ const Loading = styled.div`
   flex-flow: row wrap;
   align-items: center;
   justify-content: center;
+  color: #0f0d0f;
 `
 
+const ITEMS_PER_PAGE = 20
+
 const Comics = () => {
-  const { response, loading } = useFetch(getComics)
+  const [currentPage, setCurrentPage] = useState(0)
+  const [totalPages, setTotalPages] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [comicsList, setComicsList] = useState(undefined)
   const [selectedComics, setSelectedComics] = useState([])
 
   const toggleSelected = (comic) => {
@@ -51,6 +55,26 @@ const Comics = () => {
       comics.includes(comic) ? comics.filter((i) => i !== comic) : [...comics, comic],
     )
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true)
+      setComicsList(undefined)
+
+      const { data } = await getComics({ offset: currentPage * ITEMS_PER_PAGE })
+
+      setComicsList(data)
+      setTotalPages(data.data.total / ITEMS_PER_PAGE)
+      setLoading(false)
+    }
+
+    fetchData()
+  }, [currentPage])
+
+  const onPageChange = useCallback((page) => {
+    const { selected } = page
+    setCurrentPage(selected)
+  }, [])
 
   return (
     <Section>
@@ -70,15 +94,18 @@ const Comics = () => {
 
       <Grid>
         <AnimatePresence transition={{ staggerChildren: 0.5 }}>
-          {response?.data.results.map((item) => (
+          {comicsList?.data.results.map((item) => (
             <Comic
               item={item}
               isSelected={selectedComics.includes(item)}
               setSelected={(comic) => toggleSelected(comic)}
+              key={item.id}
             />
           ))}
         </AnimatePresence>
       </Grid>
+
+      <Pagination totalPages={totalPages} currentPage={1} onChange={onPageChange} />
 
       <SelectedComics items={selectedComics} />
     </Section>
