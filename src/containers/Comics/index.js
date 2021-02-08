@@ -2,8 +2,9 @@ import React, { useState, useCallback, useEffect } from 'react'
 import styled from 'styled-components'
 import { AnimatePresence } from 'framer-motion'
 
-import { getComics } from '../../services/index'
-import { Comic, SelectedComics, Pagination } from '../../components'
+import { getComics } from '../../services'
+import useDebounce from '../../hooks/useDebounce'
+import { Comic, SelectedComics, Pagination, Search } from '../../components'
 
 const Section = styled.section`
   margin-top: 60px;
@@ -16,6 +17,10 @@ const Header = styled.div`
   padding: 0 24px;
   color: #0f0d0f;
   margin: 32px 0;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
 
   h1 {
     margin-bottom: 16px;
@@ -49,6 +54,8 @@ const Comics = () => {
   const [loading, setLoading] = useState(false)
   const [comicsList, setComicsList] = useState(undefined)
   const [selectedComics, setSelectedComics] = useState([])
+  const [searchTerm, setSearchTerm] = useState(undefined)
+  const debouncedSearch = useDebounce(searchTerm, 600)
 
   const toggleSelected = (comic) => {
     setSelectedComics((comics) =>
@@ -61,7 +68,18 @@ const Comics = () => {
       setLoading(true)
       setComicsList(undefined)
 
-      const { data } = await getComics({ offset: currentPage * ITEMS_PER_PAGE })
+      let params = {
+        offset: currentPage * ITEMS_PER_PAGE,
+      }
+
+      if (debouncedSearch?.length > 3) {
+        params = {
+          ...params,
+          titleStartsWith: debouncedSearch,
+        }
+      }
+
+      const { data } = await getComics(params)
 
       setComicsList(data)
       setTotalPages(data.data.total / ITEMS_PER_PAGE)
@@ -69,7 +87,7 @@ const Comics = () => {
     }
 
     fetchData()
-  }, [currentPage])
+  }, [currentPage, debouncedSearch])
 
   const onPageChange = useCallback((page) => {
     const { selected } = page
@@ -79,11 +97,20 @@ const Comics = () => {
   return (
     <Section>
       <Header>
-        <h1>Lista de quadrinhos</h1>
-        <p>
-          Veja abaixo a lista de quadrinhos disponíveis. Clique para selecioná-los e compartilhar
-          com seus amigos.
-        </p>
+        <div>
+          <h1>Lista de quadrinhos</h1>
+          <p>
+            Veja abaixo a lista de quadrinhos disponíveis. Clique para selecioná-los e compartilhar
+            com seus amigos.
+          </p>
+        </div>
+
+        <Search
+          onChange={(terms) => {
+            console.log(terms)
+            setSearchTerm(terms)
+          }}
+        />
       </Header>
 
       {loading && (

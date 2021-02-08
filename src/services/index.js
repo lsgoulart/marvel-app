@@ -9,4 +9,5 @@ export const getComics = params =>
   axios.get('comics', {
     params,
   })
+export const getComic = id => axios.get(`comics/${id}`)
 export const getSeries = () => axios.get('series')
