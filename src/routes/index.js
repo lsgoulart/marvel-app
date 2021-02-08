@@ -22,6 +22,22 @@ const Main = styled.main`
   width: 100%;
 `
 
+const Footer = styled.footer`
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+
+  a {
+    font-size: 14px;
+    color: grey;
+    text-decoration: none;
+  }
+`
+
 const Routes = () => (
   <Section>
     <Marvel />
@@ -34,6 +50,9 @@ const Routes = () => (
         />
       </Router>
     </Main>
+    <Footer>
+      <a href="http://marvel.com">Data provided by Marvel. © 2021 MARVEL</a>
+    </Footer>
   </Section>
 )
 
