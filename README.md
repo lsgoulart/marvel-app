@@ -10,10 +10,8 @@ Na pasta raiz do projeto, voce pode rodar os seguintes comandos:
 ### `yarn start`
 
 Roda o projeto em modo desenvolvimento.\
-Abra [http://localhost:3000](http://localhost:3000) para ver no navegador.
+Abra [http://localhost:3000](http://localhost:3000) para ver no navegador.\
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
 ### `yarn test`
 
