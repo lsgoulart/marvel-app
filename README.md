@@ -28,10 +28,10 @@ Gera a versão de produção na pasta `build`.
 
 O projeto utiliza alguns pacotes externos para a construção das telas, são eles:
 
-[styled-components](https://styled-components.com/) - Utilizado para estilização dos componentes dentro do proprio JS
-[framer-motion](https://www.framer.com/motion/) - Utilizado para adicionar transições e animações aos componentes
-[@reach/router](https://reach.tech/router/) - Utilizado para criar sistema de rotas na aplicação
-[react-paginate](https://github.com/AdeleD/react-paginate) - Utilizado para auxiliar na criação da paginação dos quadrinhos
+[styled-components](https://styled-components.com/) - Utilizado para estilização dos componentes dentro do proprio JS\
+[framer-motion](https://www.framer.com/motion/) - Utilizado para adicionar transições e animações aos componentes\
+[@reach/router](https://reach.tech/router/) - Utilizado para criar sistema de rotas na aplicação\
+[react-paginate](https://github.com/AdeleD/react-paginate) - Utilizado para auxiliar na criação da paginação dos quadrinhos\
 
 
 ## Qualidade do código
