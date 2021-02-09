@@ -1,6 +1,10 @@
 # Marvel Comics
 
-Este projeto foi construído a partir da API pública disponível pela Marvel e tem como objetivo demonstrar o conhecimento técnico na Stack utilizada.
+Este projeto foi construído a partir da API pública disponível pela Marvel e consiste em uma listagem paginada de quadrinhos disponíveis pela API disposto em formato de grid e uma tela de detalhes dos quadrinhos.
+Ao clicar em um quadrinho ele será selecionado e uma barra de compartilhamento irá aparecer no rodapé da página. Nesta barra é possível preencher o campo e compartilhar os quadrinhos selecionados via e-mail.
+Ao clicar nos quadrinhos selecionados é feita a remoção da seleção do quadrinho.
+Acima do grid existe um campo de pesquisa onde é possível preencher com os termos desejados e será feita a busca por título dos quadrinhos na API com os termos preenchidos.
+
 Disponível em [https://lsgoulart.github.io/marvel-app/](https://lsgoulart.github.io/marvel-app/)
 
 ## Scripts disponíveis
