@@ -22,12 +22,13 @@ const Wrapper = styled.div`
 const Search = ({ onChange }) => {
   const [value, setValue] = useState()
   useEffect(() => {
-    onChange(value)
+    onChange && onChange(value)
   }, [value, onChange])
 
   return (
-    <Wrapper>
+    <Wrapper data-testid="Search">
       <input
+        data-testid="Search__input"
         type="search"
         name="search"
         onChange={(e) => setValue(e.target.value)}

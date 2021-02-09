@@ -77,13 +77,13 @@ const Comic = ({ item, isSelected, setSelected }) => {
       onTap={toggleSelect}
       isSelected={isSelected}
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0, transition: { staggerChildren: 0.4 } }}
+      animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
+      data-testid="ComicCard"
     >
-      <Infos initial={{ opacity: 0 }} animate={{ opacity: isHovering ? 1 : 0 }}>
+      <Infos initial={{ opacity: 0 }} animate={{ opacity: isHovering ? 1 : 0 }} data-testid="ComicCard__infos">
         <motion.div animate={{ y: isHovering ? 0 : 50, opacity: isHovering ? 1 : 0 }}>
           <motion.h1>{item.title}</motion.h1>
-
           <Link to={`quadrinho/${item.id}`}>Ver detalhes</Link>
         </motion.div>
       </Infos>

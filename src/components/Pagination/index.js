@@ -50,7 +50,7 @@ const Wrapper = styled.div`
 `
 
 const Pagination = ({ totalPages, onChange }) => (
-  <Wrapper>
+  <Wrapper data-testid="Pagination">
     <ReactPaginate
       pageCount={totalPages}
       pageRangeDisplayed={5}

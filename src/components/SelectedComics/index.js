@@ -114,6 +114,7 @@ const SelectedComics = ({ items }) => {
           animate={{ y: 0 }}
           exit={{ y: '100%' }}
           transition={{ type: 'spring', bounce: 0.1 }}
+          data-testid="SelectedComics"
         >
           <Container>
             <p>
