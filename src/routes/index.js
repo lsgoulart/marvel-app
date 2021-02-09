@@ -1,5 +1,5 @@
 import React, { lazy } from 'react'
-import { Router } from '@reach/router'
+import { Router, Redirect } from '@reach/router'
 import styled from 'styled-components'
 
 import { ReactComponent as Marvel } from '../assets/marvel-logo.svg'
@@ -41,7 +41,9 @@ const Footer = styled.footer`
 const Routes = () => (
   <Section>
     <Marvel />
-    <Main>
+    <Main> 
+      <Redirect from="/" to="/marvel-app" />
+
       <Router basepath="/marvel-app">
         <Route path="/" component={lazy(() => import('../containers/Comics'))} />
         <Route
