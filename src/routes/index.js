@@ -42,7 +42,7 @@ const Routes = () => (
   <Section>
     <Marvel />
     <Main> 
-      <Redirect from="/" to="/marvel-app" />
+      <Redirect from="/" to="/marvel-app" noThrow />
 
       <Router basepath="/marvel-app">
         <Route path="/" component={lazy(() => import('../containers/Comics'))} />
